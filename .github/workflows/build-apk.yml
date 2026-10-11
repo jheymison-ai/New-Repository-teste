@@ -34,8 +34,9 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Configurar o Android SDK
-        uses: android-actions/setup-android@v3
+      # O runner ubuntu-latest já traz o Android SDK; só garantimos as licenças.
+      - name: Aceitar licenças do Android SDK
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
       - name: Configurar o Gradle 8.7
         uses: gradle/actions/setup-gradle@v4
